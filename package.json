@@ -1,0 +1,38 @@
+{
+  "name": "github-backup",
+  "version": "1.0.0",
+  "description": "",
+  "main": "handler.js",
+  "scripts": {
+    "deploy": "serverless deploy",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "serverless",
+    "cron"
+  ],
+  "author": {
+    "name": "Ryan Dsouza",
+    "email": "dsouza.ryan.11@gmail.com"
+  },
+  "license": "ISC",
+  "devDependencies": {
+    "husky": ">=4",
+    "lint-staged": ">=10",
+    "prettier": "^2.0.5",
+    "serverless": "^1.77.1"
+  },
+  "prettier": {
+    "semi": false,
+    "singleQuote": true,
+    "arrowParens": "avoid"
+  },
+  "husky": {
+    "hooks": {
+      "pre-commit": "lint-staged"
+    }
+  },
+  "lint-staged": {
+    "*.{js,json,md}": "prettier --write"
+  }
+}
