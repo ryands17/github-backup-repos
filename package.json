@@ -1,13 +1,14 @@
 {
   "name": "github-backup",
   "version": "1.0.0",
-  "description": "",
-  "main": "handler.js",
+  "description": "Backup your GitHub repos with a scheduler Lambda function",
+  "main": "src/index.js",
   "scripts": {
-    "deploy": "serverless deploy",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "deploy": "sls deploy",
+    "offline": "sls schedule"
   },
   "keywords": [
+    "lambda",
     "serverless",
     "cron"
   ],
@@ -16,11 +17,17 @@
     "email": "dsouza.ryan.11@gmail.com"
   },
   "license": "ISC",
+  "dependencies": {
+    "@octokit/rest": "^18.0.3"
+  },
   "devDependencies": {
+    "aws-sdk": "^2.725.0",
     "husky": ">=4",
     "lint-staged": ">=10",
     "prettier": "^2.0.5",
-    "serverless": "^1.77.1"
+    "serverless": "^1.77.1",
+    "serverless-iam-roles-per-function": "^2.0.2",
+    "serverless-offline-scheduler": "^0.4.2"
   },
   "prettier": {
     "semi": false,
