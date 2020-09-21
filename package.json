@@ -5,7 +5,7 @@
   "main": "src/index.js",
   "scripts": {
     "deploy": "sls deploy",
-    "offline": "sls schedule"
+    "dev": "sls schedule"
   },
   "keywords": [
     "lambda",
@@ -18,14 +18,14 @@
   },
   "license": "ISC",
   "dependencies": {
-    "@octokit/rest": "^18.0.3"
+    "@octokit/rest": "^18.0.6"
   },
   "devDependencies": {
-    "aws-sdk": "^2.725.0",
-    "eslint": "^7.6.0",
-    "husky": ">=4",
-    "lint-staged": ">=10",
-    "prettier": "^2.0.5",
+    "aws-sdk": "^2.756.0",
+    "eslint": "^7.9.0",
+    "husky": ">=4.3.0",
+    "lint-staged": ">=10.4.0",
+    "prettier": "^2.1.2",
     "serverless": "^1.77.1",
     "serverless-iam-roles-per-function": "^2.0.2",
     "serverless-offline-scheduler": "^0.4.2"
