@@ -10,7 +10,7 @@ provider:
   profile: ${opt:profile, 'default'}
   region: ${opt:profile, 'us-east-2'}
   memorySize: 512
-  timeout: 240
+  timeout: 300
   logRetentionInDays: 7
 
 functions:
