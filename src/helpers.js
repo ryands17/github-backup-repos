@@ -1,24 +1,32 @@
-const AWS = require('aws-sdk')
-const SSM = new AWS.SSM()
-const S3 = new AWS.S3()
+import { SSMClient, GetParametersByPathCommand } from '@aws-sdk/client-ssm';
+import { S3Client, PutObjectCommand } from '@aws-sdk/client-s3';
 
-exports.getParameters = async () => {
-  const { Parameters } = await SSM.getParametersByPath({
-    Path: '/gh-backup',
-    WithDecryption: true,
-  }).promise()
+const SSM = new SSMClient();
+const S3 = new S3Client();
+
+const path = '/gh-backup';
+
+export async function getParameters() {
+  const { Parameters } = await SSM.send(
+    new GetParametersByPathCommand({
+      Path: path,
+      WithDecryption: true,
+    }),
+  );
 
   return [
-    Parameters.find(param => param.Name === '/gh-backup/auth').Value,
-    Parameters.find(param => param.Name === '/gh-backup/bucket').Value,
-  ]
+    Parameters.find((param) => param.Name === `${path}/auth`).Value,
+    Parameters.find((param) => param.Name === `${path}/bucket`).Value,
+  ];
 }
 
-exports.uploadToS3 = ({ name, data, Bucket }) => {
-  return S3.upload({
-    Bucket,
-    Key: `${name}.tar.gz`,
-    Body: Buffer.from(data),
-    StorageClass: 'ONEZONE_IA',
-  }).promise()
+export function uploadToS3({ name, data, Bucket }) {
+  return S3.send(
+    new PutObjectCommand({
+      Bucket,
+      Key: `${name}.tar.gz`,
+      Body: Buffer.from(data),
+      StorageClass: 'ONEZONE_IA',
+    }),
+  );
 }

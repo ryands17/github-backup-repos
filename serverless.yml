@@ -1,16 +1,13 @@
 service: github-backup
-# app and org for use with dashboard.serverless.com
-#app: your-app-name
-#org: your-org-name
 
 provider:
   name: aws
-  runtime: nodejs12.x
+  runtime: nodejs18.x
   stage: dev
-  profile: ${opt:profile, 'default'}
-  region: ${opt:profile, 'us-east-2'}
-  memorySize: 512
-  timeout: 300
+  region: ${opt:region, 'us-east-2'}
+  memorySize: 1024
+  timeout: 900
+  architecture: arm64
   logRetentionInDays: 7
 
 functions:
@@ -31,6 +28,8 @@ functions:
           - kms:Decrypt
         Resource: 'arn:aws:kms:${self:provider.region}:*:key/*'
     handler: src/index.backup
+    environment:
+      TZ: UTC
     events:
       - schedule: rate(7 days)
 

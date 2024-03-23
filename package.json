@@ -3,9 +3,11 @@
   "version": "1.0.0",
   "description": "Backup your GitHub repos with a scheduler Lambda function",
   "main": "src/index.js",
+  "type": "module",
   "scripts": {
+    "prepare": "husky",
     "deploy": "sls deploy",
-    "dev": "sls schedule"
+    "dev": "sls schedule --runSchedulesOnInit"
   },
   "keywords": [
     "lambda",
@@ -18,27 +20,25 @@
   },
   "license": "ISC",
   "dependencies": {
-    "@octokit/rest": "^18.0.6"
+    "@octokit/rest": "^20.0.2"
   },
   "devDependencies": {
+    "@aws-sdk/client-s3": "^3.540.0",
+    "@aws-sdk/client-ssm": "^3.540.0",
     "aws-sdk": "^2.756.0",
-    "eslint": "^7.9.0",
-    "husky": ">=4.3.0",
+    "eslint": "8.57.0",
+    "husky": "9",
     "lint-staged": ">=10.4.0",
-    "prettier": "^2.1.2",
-    "serverless": "^1.77.1",
-    "serverless-iam-roles-per-function": "^2.0.2",
-    "serverless-offline-scheduler": "^0.4.2"
+    "prettier": "3.2.5",
+    "serverless": "3.38.0",
+    "serverless-iam-roles-per-function": "3.2.0",
+    "serverless-offline-scheduler": "0.5.0"
+  },
+  "resolutions": {
+    "crc32-stream": "^4.0.2"
   },
   "prettier": {
-    "semi": false,
-    "singleQuote": true,
-    "arrowParens": "avoid"
-  },
-  "husky": {
-    "hooks": {
-      "pre-commit": "lint-staged"
-    }
+    "singleQuote": true
   },
   "lint-staged": {
     "*.{js,json,md}": "prettier --write"

@@ -1,11 +1,15 @@
-const { getParameters } = require('./helpers')
-const { downloadRepos } = require('./github')
+import { getParameters } from './helpers.js';
+import { downloadRepos } from './github.js';
 
-module.exports.backup = async _event => {
-  const [auth, bucket] = await getParameters()
-  await downloadRepos({ auth, bucket })
-  console.log('cron ran successfully at', new Date().toDateString())
-  return {
-    message: 'Backup successful!',
-  }
+export async function backup() {
+  console.log('Starting function');
+
+  const [auth, bucket] = await getParameters();
+  console.log('Fetched parameters');
+
+  console.log('Downloading repos');
+  await downloadRepos({ auth, bucket });
+  console.log('cron ran successfully at', new Date().toDateString());
+
+  return { message: 'Backup successful!' };
 }
